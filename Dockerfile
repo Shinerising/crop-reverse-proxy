@@ -21,4 +21,4 @@ EXPOSE 80 443
 
 ENV DOMAIN="example.com example2.com"
 
-CMD mkcert -key-file /usr/share/nginx/key.pem -cert-file /usr/share/nginx/cert.pem ${DOMAIN} ; nginx -g "daemon off" ;
+CMD mkcert -key-file /usr/share/nginx/key.pem -cert-file /usr/share/nginx/cert.pem ${DOMAIN} && nginx -g "daemon off;"
