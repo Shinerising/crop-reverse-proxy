@@ -8,7 +8,3 @@ RUN go get -u github.com/FiloSottile/mkcert && \
 
 RUN mkcert -install && \
     cp $(mkcert -CAROOT)/rootCA.pem /usr/src/app/rootCA.pem
-
-FROM nginx:1.25.2-alpine
-
-CMD ["nginx", "-g", "daemon off;"]
