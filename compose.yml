@@ -14,8 +14,6 @@ services:
   proxy:
     image: ghcr.io/shinerising/crop-reverse-proxy:master
     restart: always
-    volumes:
-      - /volume1/docker/crop/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       - "3380:80"
       - "33443:443"
@@ -29,9 +27,9 @@ services:
     image: ghcr.io/shinerising/station-stats:master
     restart: always
     volumes:
-      - /volume1/docker/station-stats/config:/config:ro
-      - /volume1/docker/station-stats/station:/station:ro
-      - /volume1/docker/station-stats/data:/data:ro
+      - /volume1/docker/station-stats/config:/config
+      - /volume1/docker/station-stats/station:/station
+      - /volume1/docker/station-stats/data:/data
     ports:
       - "8376:8376"
     environment:
