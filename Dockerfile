@@ -16,6 +16,7 @@ COPY --from=build-mkcert /root/.local/share/mkcert/rootCA.pem /root/.local/share
 COPY --from=build-mkcert /root/.local/share/mkcert/rootCA-key.pem /root/.local/share/mkcert/rootCA-key.pem
 
 COPY nginx.conf /etc/nginx/nginx.conf
+COPY conf.template /etc/nginx/templates/10-variables.conf.template
 
 EXPOSE 80 443
 

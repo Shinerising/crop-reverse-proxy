@@ -1,0 +1,7 @@
+map $host $url_dars {
+  default "$URL_DARS";
+}
+
+map $host $url_graph {
+  default "$URL_GRAPH";
+}
