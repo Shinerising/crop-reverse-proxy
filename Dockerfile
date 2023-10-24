@@ -25,4 +25,4 @@ ENV URL_CROP="crop:8080"
 ENV URL_DARS="dars:8080"
 ENV URL_GRAPH="graph:8080"
 
-CMD mkcert -key-file /usr/share/nginx/key.pem -cert-file /usr/share/nginx/cert.pem ${DOMAIN} && envsubst < /etc/nginx/templates/10-variables.conf.template > /etc/nginx/nginx.conf && nginx -g "daemon off;"
+CMD mkcert -key-file /usr/share/nginx/key.pem -cert-file /usr/share/nginx/cert.pem ${DOMAIN} && envsubst < /etc/nginx/templates/10-variables.conf.template > /etc/nginx/variables.conf && nginx -g "daemon off;"
