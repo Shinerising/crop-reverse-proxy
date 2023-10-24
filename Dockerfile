@@ -18,10 +18,10 @@ COPY nginx.conf conf.template /etc/nginx/
 
 EXPOSE 80 443
 
-ENV DOMAIN="crop.crscd.net tw-dars.crop.crscd.net graph.crop.crscd.net"
-ENV URL_API="api:8080"
+ENV DOMAIN="crop.crscd.net dashboard.crop.crscd.net tw-dars.crop.crscd.net graph.crop.crscd.net"
 ENV URL_CROP="crop:8080"
+ENV URL_DASHBOARD="dashboard:8080"
 ENV URL_DARS="dars:8080"
 ENV URL_GRAPH="graph:8080"
 
-CMD mkcert -key-file /usr/share/nginx/key.pem -cert-file /usr/share/nginx/cert.pem ${DOMAIN} && envsubst '${URL_API},${URL_CROP},${URL_DARS},${URL_GRAPH}' < /etc/nginx/conf.template > /etc/nginx/variables.conf && nginx -g "daemon off;"
+CMD mkcert -key-file /usr/share/nginx/key.pem -cert-file /usr/share/nginx/cert.pem ${DOMAIN} && envsubst '${URL_CROP},${URL_DASHBOARD},${URL_DARS},${URL_GRAPH}' < /etc/nginx/conf.template > /etc/nginx/variables.conf && nginx -g "daemon off;"

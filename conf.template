@@ -1,9 +1,9 @@
-map $host $url_api {
-  default ${URL_API};
-}
-
 map $host $url_crop {
   default ${URL_CROP};
+}
+
+map $host $url_dashboard {
+  default ${URL_DASHBOARD};
 }
 
 map $host $url_dars {

@@ -10,10 +10,17 @@ networks:
     driver: bridge
     internal: true
 
+volumes:
+  asset-dars:
+  asset-dashboard:
+
 services:
   proxy:
     image: ghcr.io/shinerising/crop-reverse-proxy:master
     restart: always
+    volumes:
+      - asset-dars:/usr/share/nginx/asset-dars
+      - asset-dashboard:/usr/share/nginx/asset-dashboard
     ports:
       - "3380:80"
       - "33443:443"
@@ -27,6 +34,7 @@ services:
     image: ghcr.io/shinerising/station-stats:master
     restart: always
     volumes:
+      - asset-dars:/App/public
       - /volume1/docker/station-stats/config:/config
       - /volume1/docker/station-stats/station:/station
       - /volume1/docker/station-stats/data:/data
@@ -35,5 +43,15 @@ services:
     environment:
       - SERVER_CONFIG=/config/server.xml
       - STATION_CONFIG=/config/station.xml
+    networks:
+      - frontend
+
+  dashboard:
+    image: ghcr.io/shinerising/crop-dashboard:main
+    restart: always
+    volumes:
+      - asset-dashboard:/App/public
+    ports:
+      - "3381:80"
     networks:
       - frontend
