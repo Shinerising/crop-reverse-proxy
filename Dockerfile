@@ -12,6 +12,7 @@ FROM nginx:1.25.2-alpine
 
 COPY --from=build-mkcert /bin/mkcert /bin/mkcert
 COPY --from=build-mkcert /root/.local/share/mkcert/rootCA.pem /root/.local/share/mkcert/rootCA-key.pem /root/.local/share/mkcert/
+COPY --from=build-mkcert /root/.local/share/mkcert/rootCA.pem /usr/share/nginx/ca.pem
 
 COPY nginx.conf conf.template /etc/nginx/
 
