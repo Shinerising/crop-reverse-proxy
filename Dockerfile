@@ -6,14 +6,13 @@ RUN apk add --no-cache git && \
     git clone https://github.com/FiloSottile/mkcert && \
     cd mkcert && \
     go build -o /bin/mkcert && \
-    mkcert -install && \
-    gzip -k /root/.local/share/mkcert/rootCA.pem
+    mkcert -install
 
 FROM nginx:1.25.2-alpine
 
 COPY --from=build-mkcert /bin/mkcert /bin/mkcert
 COPY --from=build-mkcert /root/.local/share/mkcert/rootCA.pem /root/.local/share/mkcert/rootCA-key.pem /root/.local/share/mkcert/
-COPY --from=build-mkcert /root/.local/share/mkcert/rootCA.pem.gz /usr/share/nginx/ca.pem.gz
+COPY --from=build-mkcert /root/.local/share/mkcert/rootCA.pem /usr/share/nginx/ca.pem
 
 COPY nginx.conf conf.template /etc/nginx/
 
