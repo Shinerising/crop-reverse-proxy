@@ -1,7 +1,11 @@
-map $host $url_dars {
-  default "$URL_DARS";
+map $url_crop {
+  default ${URL_CROP};
 }
 
-map $host $url_graph {
-  default "$URL_GRAPH";
+map $url_dars {
+  default ${URL_DARS};
+}
+
+map $url_graph {
+  default ${URL_GRAPH};
 }

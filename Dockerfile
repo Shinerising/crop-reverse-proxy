@@ -21,6 +21,7 @@ COPY conf.template /etc/nginx/templates/10-variables.conf.template
 EXPOSE 80 443
 
 ENV DOMAIN="crop.crscd.net tw-dars.crop.crscd.net graph.crop.crscd.net"
+ENV URL_CROP="crop:8080"
 ENV URL_DARS="dars:8080"
 ENV URL_GRAPH="graph:8080"
 
