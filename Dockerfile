@@ -13,7 +13,8 @@ FROM nginx:1.25.2-alpine
 COPY --from=build-mkcert /bin/mkcert /bin/mkcert
 COPY --from=build-mkcert /root/.local/share/mkcert/rootCA.pem /root/.local/share/mkcert/rootCA-key.pem /root/.local/share/mkcert/
 
-COPY nginx.conf conf.template /etc/nginx/
+COPY nginx.conf /etc/nginx/
+COPY conf.template /etc/nginx/templates/
 
 EXPOSE 80 443
 
@@ -22,4 +23,4 @@ ENV URL_CROP="crop:8080"
 ENV URL_DARS="dars:8080"
 ENV URL_GRAPH="graph:8080"
 
-CMD mkcert -key-file /usr/share/nginx/key.pem -cert-file /usr/share/nginx/cert.pem ${DOMAIN} && envsubst '${URL_CROP},${URL_DARS},${URL_GRAPH}' < /etc/nginx/conf.template > /etc/nginx/variables.conf && nginx -g "daemon off;"
+CMD mkcert -key-file /usr/share/nginx/key.pem -cert-file /usr/share/nginx/cert.pem ${DOMAIN} && nginx -g "daemon off;"
