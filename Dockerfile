@@ -19,7 +19,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80 443
 
-ENV DOMAIN="crop.crscd.net tw-dars.crop.crscd.net"
+ENV DOMAIN="crop.crscd.net tw-dars.crop.crscd.net graph.crop.crscd.net"
 ENV URL_DARS="dars:8080"
+ENV URL_GRAPH="graph:8080"
 
 CMD mkcert -key-file /usr/share/nginx/key.pem -cert-file /usr/share/nginx/cert.pem ${DOMAIN} && nginx -g "daemon off;"
