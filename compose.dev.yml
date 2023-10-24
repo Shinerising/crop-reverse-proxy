@@ -19,11 +19,12 @@ services:
     image: ghcr.io/shinerising/crop-reverse-proxy:master
     restart: always
     volumes:
+      - /volume1/docker/crop/nginx.conf:/etc/nginx/nginx.conf:ro
       - asset-dars:/usr/share/nginx/asset-dars:ro
       - asset-dashboard:/usr/share/nginx/asset-dashboard:ro
     ports:
-      - "80:80"
-      - "443:443"
+      - "3380:80"
+      - "33443:443"
     environment:
       - URL_DARS=dars:8376
       - URL_DASHBOARD=dashboard:7344
