@@ -1,3 +1,7 @@
+map $host $url_api {
+  default ${URL_API};
+}
+
 map $host $url_crop {
   default ${URL_CROP};
 }
