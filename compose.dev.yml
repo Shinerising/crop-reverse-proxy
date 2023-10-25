@@ -45,6 +45,11 @@ services:
     environment:
       - SERVER_CONFIG=/config/server.xml
       - STATION_CONFIG=/config/station.xml
+    deploy:
+      resources:
+        limits:
+          # cpus: "0.5"
+          memory: 512M
     networks:
       - frontend
 
@@ -55,6 +60,11 @@ services:
       - asset-dashboard:/App/public
     ports:
       - "7344:80"
+    deploy:
+      resources:
+        limits:
+          # cpus: "0.5"
+          memory: 512M
     tty: true
     networks:
       - frontend
