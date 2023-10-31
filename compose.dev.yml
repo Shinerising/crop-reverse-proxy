@@ -5,10 +5,8 @@ networks:
     driver: bridge
   frontend:
     driver: bridge
-    internal: true
   backend:
     driver: bridge
-    internal: true
 
 volumes:
   asset-dars:
@@ -31,6 +29,29 @@ services:
     networks:
       - proxy
       - frontend
+
+  postgres:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=crop
+      - POSTGRES_PASSWORD=crop
+      - POSTGRES_DB=db_crop
+    volumes:
+      - /volume1/docker/crop/postgres:/var/lib/postgresql/data
+    ports:
+      - "15432:5432"
+    networks:
+      - backend
+  
+  redis:
+    image: redis/redis-stack-server:7.2.0-v5
+    volumes:
+      - /volume1/docker/crop/redis-stack:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
 
   dars:
     image: ghcr.io/shinerising/station-stats:master

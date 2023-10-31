@@ -31,14 +31,37 @@ services:
       - proxy
       - frontend
 
+  postgres:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=crop
+      - POSTGRES_PASSWORD=crop
+      - POSTGRES_DB=db_crop
+    volumes:
+      - /etc/docker/volume/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+  
+  redis:
+    image: redis/redis-stack-server:7.2.0-v5
+    volumes:
+      - /etc/docker/volume/redis-stack:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+
   dars:
     image: ghcr.io/shinerising/station-stats:master
     restart: always
     volumes:
       - asset-dars:/App/public
-      - /volume1/docker/station-stats/config:/config
-      - /volume1/docker/station-stats/station:/station
-      - /volume1/docker/station-stats/data:/data
+      - /etc/docker/volume/station-stats/config:/config
+      - /etc/docker/volume/station-stats/station:/station
+      - /etc/docker/volume/station-stats/data:/data
     ports:
       - "8376:8376"
     environment:
