@@ -46,11 +46,30 @@ services:
   
   redis:
     image: redis/redis-stack-server:7.2.0-v5
+    restart: always
     volumes:
       - /volume1/docker/crop/redis-stack:/data
     ports:
       - "6379:6379"
     networks:
+      - backend
+
+  api:
+    image: ghcr.io/shinerising/crop-api:master
+    restart: always
+    volumes:
+      - /volume1/docker/crop/api:/crop-api-app/Config
+    ports:
+      - "5182:5182"
+    environment:
+      - DATABASE_URL=Server=postgres;Port=5432;Database=db_crop;User Id=crop;Password=crop;
+      - REDIS_URL=redis://redis:6379
+      - SECRET_KEY=secret
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - frontend
       - backend
 
   dars:
