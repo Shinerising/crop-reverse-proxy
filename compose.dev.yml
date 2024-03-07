@@ -76,7 +76,9 @@ services:
     image: ghcr.io/shinerising/crop-analysis:master
     restart: always
     volumes:
-      - /volume1/docker/crop/api:/crop-api-app/Config
+      - /volume1/docker/station-stats/config:/config
+      - /volume1/docker/station-stats/station:/station
+      - /volume1/docker/station-stats/data:/data
     ports:
       - "5182:5182"
     environment:
