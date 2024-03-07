@@ -71,7 +71,19 @@ services:
     networks:
       - frontend
       - backend
-
+      
+  analysis:
+    image: ghcr.io/shinerising/crop-analysis:master
+    restart: always
+    volumes:
+      - /volume1/docker/crop/api:/crop-api-app/Config
+    ports:
+      - "5182:5182"
+    environment:
+      - DATABASE_URL=Server=postgres;Port=5432;Database=db_crop;User Id=crop;Password=crop;
+    depends_on:
+      - postgres
+      
   dars:
     image: ghcr.io/shinerising/station-stats:master
     restart: always
