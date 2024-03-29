@@ -18,7 +18,7 @@ COPY nginx.conf conf.template /etc/nginx/
 
 EXPOSE 80 443
 
-ENV DOMAIN="crop.crscd.net dashboard.crop.crscd.net tw-dars.crop.crscd.net graph.crop.crscd.net"
+ENV DOMAIN="crop.crscd.net tw-dars.crop.crscd.net graph.crop.crscd.net"
 ENV URL_CROP="crop:8080"
 ENV URL_DASHBOARD="dashboard:8080"
 ENV URL_DARS="dars:8080"
